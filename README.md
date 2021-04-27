@@ -9,7 +9,7 @@ Vimiv Video enables support for videos. Videos get listed within vimiv and can b
 - Activate Vimiv Video by adding `video =` to the `PLUGINS` section of `$XDG_CONFIG_HOME/vimiv/vimiv.conf`.
 
 ### Usage
-All your videos are automatically listed in vimiv. To play the currently selected video, type something like `:mpv %`.
+All your videos are automatically listed in vimiv. To play the currently selected video, type something like `:!mpv %`.
 
 ### Supported Formats
 The following video formats are currently supported:
