@@ -1,4 +1,4 @@
-#ffmpeg vim: ft=python fileencoding=utf-8 sw=4 et sts=4
+# vim: ft=python fileencoding=utf-8 sw=4 et sts=4
 
 from typing import Any, BinaryIO
 
@@ -13,6 +13,31 @@ _logger = log.module_logger(__name__)
 
 def test_mov(header: bytes, _f: BinaryIO) -> bool:
     return header[4:8] == b"ftyp" and header[8:10] == b"qt"
+
+
+def test_mp4(header: bytes, _f: BinaryIO) -> bool:
+    print(header[8:12])
+    return header[4:8] == b"ftyp" and header[8:12].decode() in (
+        "avc1",
+        "iso2",
+        "isom",
+        "mmp4",
+        "mp41",
+        "mp42",
+        "mp71",
+        "msnv",
+        "ndas",
+        "ndsc",
+        "ndsh",
+        "ndsm",
+        "ndsp",
+        "ndss",
+        "ndxc",
+        "ndxh",
+        "ndxm",
+        "ndxp",
+        "ndxs",
+    )
 
 
 def load_frame(path) -> QPixmap:
@@ -42,5 +67,6 @@ def load_frame(path) -> QPixmap:
 def init(info: str, *_args: Any, **_kwargs: Any) -> None:
     """Setup RawPrev plugin by adding the raw handler"""
     api.add_external_format("mov", test_mov, load_frame)
+    api.add_external_format("mp4", test_mp4, load_frame)
 
     _logger.debug("Initialized RawPrev")

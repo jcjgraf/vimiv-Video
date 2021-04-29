@@ -17,6 +17,7 @@ The following video formats are currently supported:
 | **Format**      | **Extension** |
 | :---            | :---:         |
 | QuickTime Movie | `.mov`        |
+| MPEG-4          | `.mp4`        |
 
 ### Contribute
 If you would like support for a new video format feel free to open a PR with the appropriate additions. In case you do not know how this is implemented, you are also very welcome to open an issue and submit an adequate sample file.
