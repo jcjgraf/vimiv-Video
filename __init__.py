@@ -16,7 +16,6 @@ def test_mov(header: bytes, _f: BinaryIO) -> bool:
 
 
 def test_mp4(header: bytes, _f: BinaryIO) -> bool:
-    print(header[8:12])
     return header[4:8] == b"ftyp" and header[8:12].decode() in (
         "avc1",
         "iso2",
