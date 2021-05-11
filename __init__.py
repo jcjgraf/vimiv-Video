@@ -39,6 +39,10 @@ def test_mp4(header: bytes, _f: BinaryIO) -> bool:
     )
 
 
+def test_avi(header: bytes, _f: BinaryIO) -> bool:
+    return header[0:4] == b"RIFF" and header[8:11] == b"AVI"
+
+
 def load_frame(path) -> QPixmap:
     """Extract the first frame from the video and initialize QPixmap"""
 
@@ -67,5 +71,6 @@ def init(info: str, *_args: Any, **_kwargs: Any) -> None:
     """Setup RawPrev plugin by adding the raw handler"""
     api.add_external_format("mov", test_mov, load_frame)
     api.add_external_format("mp4", test_mp4, load_frame)
+    api.add_external_format("avi", test_avi, load_frame)
 
     _logger.debug("Initialized RawPrev")

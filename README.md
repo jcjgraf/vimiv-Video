@@ -6,10 +6,11 @@ Vimiv Video enables support for videos. Videos get listed within vimiv and can b
 ### Supported Formats
 The following video formats are currently supported:
 
-| **Format**      | **Extension** |
-| :---            | :---:         |
-| QuickTime Movie | `.mov`        |
-| MPEG-4          | `.mp4`        |
+| **Format**                   | **Extension** |
+| :---                         | :---:         |
+| MPEG-4                       | `.mp4`        |
+| QuickTime Movie              | `.mov`        |
+| Audio Video Interleave (AVI) | `.avi`        |
 
 ### Installation
 - This plugin requires `ffmpeg` which needs to be installed.
