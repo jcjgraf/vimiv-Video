@@ -47,7 +47,7 @@ def load_frame(path) -> QPixmap:
     """Extract the first frame from the video and initialize QPixmap"""
 
     process = QProcess()
-    process.start(f"ffmpeg -loglevel quiet -i {path} -vframes 1 -f singlejpeg pipe:1")
+    process.start(f"ffmpeg -loglevel quiet -i {path} -vframes 1 -f image2 pipe:1")
     process.waitForFinished()
 
     if process.exitStatus() != QProcess.NormalExit or process.exitCode() != 0:
