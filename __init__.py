@@ -2,10 +2,9 @@
 
 from typing import Any, BinaryIO
 
-from PyQt5.QtGui import QPixmap, QImageReader
-from PyQt5.QtCore import QProcess
-
 from vimiv import api
+from vimiv.qt.core import QProcess
+from vimiv.qt.gui import QPixmap, QImageReader
 from vimiv.utils import log
 
 _logger = log.module_logger(__name__)
@@ -47,10 +46,19 @@ def load_frame(path) -> QPixmap:
     """Extract the first frame from the video and initialize QPixmap"""
 
     process = QProcess()
-    process.start(f"ffmpeg -loglevel quiet -i {path} -vframes 1 -f image2 pipe:1")
-    process.waitForFinished()
+    process.start(
+        "ffmpeg",
+        ["-loglevel", "quiet", "-i", path, "-vframes", "1", "-f", "image2", "pipe:1"],
+    )
+    if not process.waitForFinished():
+        _logger.error(f"Process exited with code {process.exitCode()}")
+        raise OSError("Error waiting for process")
 
-    if process.exitStatus() != QProcess.NormalExit or process.exitCode() != 0:
+    if (
+        process.exitStatus() != QProcess.ExitStatus.NormalExit
+        or process.exitCode() != 0
+    ):
+        _logger.error(f"Process exited with code {process.exitCode()}")
         stderr = process.readAllStandardError()
         raise ValueError(f"Error calling ffmpeg: '{stderr.data().decode()}'")
 
